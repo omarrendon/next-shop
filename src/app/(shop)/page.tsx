@@ -1,5 +1,9 @@
-import React from "react";
+import { Title } from "@/components";
 
 export default function page() {
-  return <div>page</div>;
+  return (
+    <>
+      <Title title="Tienda" subtitle="Todos los productos" className="mb-2" />
+    </>
+  );
 }
