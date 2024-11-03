@@ -25,7 +25,10 @@ export const SideBar = () => {
       )}
       {/* blur */}
       {isSideMenuOpen && (
-        <div className="fade-in fixed top-10 left-10 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"></div>
+        <div
+          onClick={() => closeMenu()}
+          className="fade-in fixed top-10 left-10 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"
+        ></div>
       )}
       {/* sidemenu */}
       <nav
@@ -37,7 +40,7 @@ export const SideBar = () => {
         <IoCloseOutline
           size={50}
           className="absolute top-5 right-5 cursor-pointer"
-          onClick={closeMenu}
+          onClick={() => closeMenu()}
         />
         {/* input */}
         <div className="relative mt-14">
