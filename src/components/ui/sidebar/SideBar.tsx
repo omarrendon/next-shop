@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import {
   IoCloseOutline,
@@ -9,20 +10,34 @@ import {
   IoShirtOutline,
   IoTicketOutline,
 } from "react-icons/io5";
+import { useUIStore } from "@/store";
+import { cn } from "@/utils/mergeStyles";
 
 export const SideBar = () => {
+  const isSideMenuOpen = useUIStore(state => state.isSideMenuOpen);
+  const closeMenu = useUIStore(state => state.closeSideMenu);
+
   return (
     <div className="">
       {/* blackground blur */}
-      <div className="fixed top-10 left-0 w-screen h-screen z-10 bg-black opacity-30"></div>
+      {isSideMenuOpen && (
+        <div className="fixed top-10 left-0 w-screen h-screen z-10 bg-black opacity-30"></div>
+      )}
       {/* blur */}
-      <div className="fade-in fixed top-10 left-10 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"></div>
+      {isSideMenuOpen && (
+        <div className="fade-in fixed top-10 left-10 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm"></div>
+      )}
       {/* sidemenu */}
-      <nav className="fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300">
+      <nav
+        className={cn(
+          `fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300`,
+          !isSideMenuOpen && "translate-x-full"
+        )}
+      >
         <IoCloseOutline
           size={50}
           className="absolute top-5 right-5 cursor-pointer"
-          onClick={() => {}}
+          onClick={closeMenu}
         />
         {/* input */}
         <div className="relative mt-14">
