@@ -1,7 +1,7 @@
-import { SizeSelector } from "@/components";
+import { notFound } from "next/navigation";
+import { ProductSlideshow, QuantitySelector, SizeSelector } from "@/components";
 import { titleFont } from "@/config/fonts";
 import { initialData } from "@/seed/seed";
-import { notFound } from "next/navigation";
 
 interface Props {
   params: {
@@ -20,7 +20,10 @@ export default async function ProductPage({ params }: Props) {
   return (
     <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
       {/* slideshow */}
-      <div className="cols-spna-1 md:col-span-2">hola</div>
+
+      <div className="cols-spna-1 md:col-span-2">
+        <ProductSlideshow title={product.title} images={product.images} />
+      </div>
 
       {/* detalles */}
       <div className="cols-spna-1 px-5 ">
@@ -36,6 +39,7 @@ export default async function ProductPage({ params }: Props) {
         />
 
         {/* selector de cantidad */}
+        <QuantitySelector quantity={2} />
         {/* Button */}
         <button className="btn-primary my-5">Agregar al carrito</button>
         {/* descripcion */}
