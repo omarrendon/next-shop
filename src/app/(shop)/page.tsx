@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { getpaginatedProductsWithImages } from "@/actions";
-import { ProductGrid, Title } from "@/components";
+import { Pagination, ProductGrid, Title } from "@/components";
 
 interface Props {
   searchParams: {
@@ -10,11 +10,11 @@ interface Props {
 }
 
 export default async function Homepage({ searchParams }: Props) {
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const { products, currentPage, totalPages } =
-    await getpaginatedProductsWithImages({
-      page,
-    });
+  const page = await (searchParams.page ? parseInt(searchParams.page) : 1);
+
+  const { products, totalPages } = await getpaginatedProductsWithImages({
+    page,
+  });
 
   if (products.length === 0) {
     redirect("/");
@@ -24,6 +24,7 @@ export default async function Homepage({ searchParams }: Props) {
     <>
       <Title title="Tienda" subtitle="Todos los productos" className="mb-2" />
       <ProductGrid products={products} />
+      <Pagination totalPages={totalPages} />
     </>
   );
 }
