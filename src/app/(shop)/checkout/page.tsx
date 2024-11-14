@@ -75,7 +75,7 @@ export default function CheckoutPage() {
             <div className="mt-5 mb-2 w-full">
               <p className="mb-5">
                 <span className="text-xs">
-                  Al hacer clic en "Colocar orden", aceptas nuestros{" "}
+                  Al hacer clic en &quot;Colocar orden&quot;, aceptas nuestros{" "}
                   <a href="#" className="underline">
                     términos y condiciones
                   </a>{" "}

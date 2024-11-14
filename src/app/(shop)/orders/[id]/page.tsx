@@ -1,9 +1,8 @@
+import Image from "next/image";
+
 import { Title } from "@/components";
 import { initialData } from "@/seed/seed";
 import { cn } from "@/utils/mergeStyles";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
 import { IoCardOutline } from "react-icons/io5";
 
 const productsInCart = [
@@ -12,14 +11,10 @@ const productsInCart = [
   initialData.products[2],
 ];
 
-interface Props {
-  params: {
-    id: string;
-  };
-}
+type Params = Promise<{ id: string }>;
 
-export default async function OrdersPage({ params }: Props) {
-  const { id } = await params;
+export default async function OrdersPage(props: { params: Params }) {
+  const { id } = await props.params;
 
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">

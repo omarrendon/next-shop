@@ -1,9 +1,7 @@
-import { QuantitySelector, Title } from "@/components";
-import { initialData } from "@/seed/seed";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import React from "react";
+import { QuantitySelector, Title } from "@/components";
+import { initialData } from "@/seed/seed";
 
 const productsInCart = [
   initialData.products[0],
