@@ -1,10 +1,12 @@
 export const revalidate = 604800; // 7 days
+
 import { notFound } from "next/navigation";
 import {
   ProductMobileSlideshow,
   ProductSlideshow,
   QuantitySelector,
   SizeSelector,
+  StockLabel,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
 import { getProductBySlug } from "@/actions";
@@ -39,9 +41,12 @@ export default async function ProductPage(props: { params: Params }) {
 
       {/* detalles */}
       <div className="cols-spna-1 px-5 ">
+        <StockLabel slug={product.slug} />
+
         <h1 className={`${titleFont.className}  antialiased font-bold text-xl`}>
           {product.title}
         </h1>
+
         <p className="text-lg mb-5">$ {product.price}</p>
 
         {/* selector de talllas */}
