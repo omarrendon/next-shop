@@ -2,7 +2,7 @@ import { Size } from "@/interfaces";
 import { cn } from "@/utils/mergeStyles";
 
 interface Props {
-  selectedSize: Size;
+  selectedSize?: Size;
   availableSizes: Size[];
 }
 

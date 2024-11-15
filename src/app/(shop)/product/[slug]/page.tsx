@@ -1,3 +1,4 @@
+export const revalidate = 604800; // 7 days
 import { notFound } from "next/navigation";
 import {
   ProductMobileSlideshow,
@@ -6,13 +7,13 @@ import {
   SizeSelector,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
-import { initialData } from "@/seed/seed";
+import { getProductBySlug } from "@/actions";
 
 type Params = Promise<{ slug: string }>;
 
 export default async function ProductPage(props: { params: Params }) {
   const { slug } = await props.params;
-  const product = initialData.products.find(product => product.slug === slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
@@ -24,14 +25,14 @@ export default async function ProductPage(props: { params: Params }) {
       <div className="cols-spna-1 md:col-span-2">
         {/* Mobile Slideshow */}
         <ProductMobileSlideshow
-          title={product.title}
-          images={product.images}
+          title={product.title as never}
+          images={product.images as never}
           className="block md:hidden"
         />
         {/* desktop slideshow */}
         <ProductSlideshow
-          title={product.title}
-          images={product.images}
+          title={product.title as never}
+          images={product.images as never}
           className="hidden md:block"
         />
       </div>
@@ -45,8 +46,8 @@ export default async function ProductPage(props: { params: Params }) {
 
         {/* selector de talllas */}
         <SizeSelector
-          selectedSize={product.sizes[0]}
-          availableSizes={product.sizes}
+          selectedSize={product.sizes![0]}
+          availableSizes={product.sizes as never}
         />
         {/* selector de cantidad */}
         <QuantitySelector quantity={2} />
