@@ -6,19 +6,31 @@ interface State {
   cart: CartProduct[];
   getTotalItems: () => number;
   addProductToCart: (product: CartProduct) => void;
+  updateProductsQuantity: (product: CartProduct, quantity: number) => void;
 }
 
 export const useCartStore = create<State>()(
   persist(
     (set, get) => ({
       cart: [],
+      updateProductsQuantity: (product: CartProduct, quantity: number) => {
+        const { cart } = get();
+
+        const updatedCartProducts = cart.map(item => {
+          if (item.id === product.id && item.size === product.size) {
+            return { ...item, quantity: quantity };
+          }
+          return item;
+        });
+
+        set({ cart: updatedCartProducts });
+      },
       getTotalItems: () => {
         const { cart } = get();
         return cart.reduce((total, item) => total + item.quantity, 0);
       },
       addProductToCart: (product: CartProduct) => {
         const { cart } = get();
-
         // 1 resvisar si el producto existe con la talla seleccionada
         const productInCart = cart.some(
           item => item.id === product.id && item.size === product.size
@@ -41,7 +53,7 @@ export const useCartStore = create<State>()(
     }),
     {
       name: "shopping-cart",
-      skipHydration: true,
+      // skipHydration: true,
     }
   )
 );
