@@ -13,17 +13,15 @@ export const CardSummary = () => {
   );
   const { summary, tax, total, totalItemsInCart } = getSummaryInformation();
 
-  // console.log( cart);
-
   useEffect(() => {
     setLoaded(true);
   }, []);
 
-  // useEffect(() => {
-  //   if (totalItemsInCart === 0 && loaded === true) {
-  //     redirect("/empty");
-  //   }
-  // }, [totalItemsInCart, loaded]);
+  useEffect(() => {
+    if (totalItemsInCart === 0 && loaded === true) {
+      redirect("/empty");
+    }
+  }, [totalItemsInCart, loaded]);
 
   if (!loaded) return <p>Cargando ...</p>;
 
