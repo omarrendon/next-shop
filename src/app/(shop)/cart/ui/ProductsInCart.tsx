@@ -7,9 +7,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export const ProductsInCart = () => {
-  const { cart: productsInCart, updateProductsQuantity } = useCartStore(
-    state => state
-  );
+  const {
+    cart: productsInCart,
+    updateProductsQuantity,
+    deleteProductToCart,
+  } = useCartStore(state => state);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -56,7 +58,12 @@ export const ProductsInCart = () => {
                 updateProductsQuantity(product, quantity)
               }
             />
-            <button className="underline mt-3">Remover</button>
+            <button
+              onClick={() => deleteProductToCart(product)}
+              className="underline mt-3"
+            >
+              Remover
+            </button>
           </div>
         </div>
       ))}
